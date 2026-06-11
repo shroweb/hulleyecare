@@ -54,7 +54,7 @@ export function Footer() {
 
       <div className="border-t border-background/10">
         <div className="container-page py-6 text-xs text-background/60 flex flex-col sm:flex-row gap-2 justify-between">
-          <span>&copy; {new Date().getFullYear()} Vision Plus Eyecare. All rights reserved.</span>
+          <span>&copy; {new Date().getFullYear()} Vision Plus Eyecare. All rights reserved. <Link to="/privacy-policy" className="hover:text-background/90 transition-colors">Privacy Policy</Link></span>
           <div className="flex gap-6">
             <span>Registered with the General Optical Council (GOC).</span>
             <span>Web design by <a href="https://swift7.co.uk" target="_blank" rel="noopener" className="hover:text-background/90 transition-colors">Swift7</a>.</span>
