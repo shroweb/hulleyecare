@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
-    "deploy": "vite build && wrangler pages deploy dist --project-name hulleyecare",
+    "postbuild": "node -e \"const fs=require('fs'),p='.output/server/wrangler.json',c=JSON.parse(fs.readFileSync(p,'utf8'));delete c.pages_build_output_dir;fs.writeFileSync(p,JSON.stringify(c,null,2))\"",
+    "deploy": "npm run build && npx wrangler deploy",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint .",
