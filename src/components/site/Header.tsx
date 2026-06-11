@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Menu, X, Phone } from "lucide-react";
-import { site } from "@/data/site";
+import { Menu, X, Phone, ChevronDown } from "lucide-react";
+import { site, services } from "@/data/site";
 import logoWhite from "@/assets/vision-plus-logo-white.png";
 
 export function Header() {
@@ -15,7 +15,7 @@ export function Header() {
         </Link>
 
         <nav className="hidden lg:flex items-center gap-10">
-          <NavLink to="/services/nhs-eye-exams" label="Services" />
+          <ServicesDropdown />
           <NavLink to="/about" label="About" />
           <NavLink to="/reviews" label="Reviews" />
           <NavLink to="/contact" label="Contact" />
@@ -60,6 +60,35 @@ export function Header() {
         </div>
       )}
     </header>
+  );
+}
+
+function ServicesDropdown() {
+  const [open, setOpen] = useState(false);
+  return (
+    <div
+      className="relative"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <button className="flex items-center gap-1 text-xs uppercase tracking-[0.2em] font-bold text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+        Services <ChevronDown className={`h-3 w-3 transition-transform ${open ? "rotate-180" : ""}`} />
+      </button>
+      {open && (
+        <div className="absolute top-full left-0 mt-2 bg-primary border border-primary-foreground/15 min-w-[220px] shadow-xl z-50">
+          {services.map((s) => (
+            <Link
+              key={s.slug}
+              to={`/services/${s.slug}`}
+              onClick={() => setOpen(false)}
+              className="block px-5 py-3.5 text-[11px] uppercase tracking-[0.15em] font-semibold text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/5 border-b border-primary-foreground/10 last:border-0 transition-colors"
+            >
+              {s.name}
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
 
